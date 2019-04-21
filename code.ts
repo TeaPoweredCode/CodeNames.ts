@@ -142,36 +142,21 @@ class Board {
 
     Render(outputEle: HTMLElement)
     {
-        let board = document.createElement('div');        
-        let topGem = this.CreateGem();
-        let leftGem = this.CreateGem();
-        let rightGem = this.CreateGem();
-        let bottomGem = this.CreateGem();        
-        let palyArea = document.createElement('div');
+        let gemColor: string = (this.StartingTeam == eCardType.BlueSpy ? "Blue" : "Red");
+        let html :string = `<div class="Board">
+                            <div class="Gem Gem1" style="background-color:${gemColor}"></div>
+                            <div class="Gem Gem2" style="background-color:${gemColor}"></div>
+                            <div class="PlayArea"></div>
+                            <div class="Gem Gem3" style="background-color:${gemColor}"></div>
+                            <div class="Gem Gem4" style="background-color:${gemColor}"></div>
+                            </div>`;
 
-        outputEle.appendChild(board);
-        board.appendChild(topGem);
-        board.appendChild(leftGem);
+        outputEle.innerHTML = html;
 
-        board.appendChild(palyArea);
-
-        board.appendChild(rightGem);
-        board.appendChild(bottomGem);
-
-
+        let playArea : HTMLElement = outputEle.querySelector(".PlayArea");
         this.cards.forEach(function (card) {
-            card.Render(palyArea);
+            card.Render(playArea);
         })
-    }
-
-    CreateGem()
-    {
-        let gem: HTMLElement = document.createElement('div');
-        gem.style.width = "25px";
-        gem.style.height = "25px";
-        gem.style.background = (this.StartingTeam == eCardType.BlueSpy ? "Blue" : "Red");
-
-        return gem;
     }
 }
 
@@ -210,9 +195,10 @@ class Card {
     Render(outputEle: HTMLElement)
     {
         this.Cardrender = document.createElement('div');
-        this.Cardrender.style.color = "Green";
+        this.Cardrender.className = 'Card';
+        this.Cardrender.style.color = 'Green';
         this.Cardrender.innerHTML = this.word;
-        this.Cardrender.addEventListener("click", (e:Event) => this.Click());
+        this.Cardrender.addEventListener('click', (e:Event) => this.Click());
         outputEle.appendChild(this.Cardrender);
     }
 }
@@ -222,6 +208,3 @@ document.body.appendChild(main);
 
 let board: Board = new Board();
 board.Render(main);
-
-
-console.log("as");

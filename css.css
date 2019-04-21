@@ -1,0 +1,28 @@
+.PlayArea { grid-area: PlayArea; }
+.Gem1 { grid-area: Gem1; }
+.Gem2 { grid-area: Gem2; }
+.Gem3 { grid-area: Gem3; }
+.Gem4 { grid-area: Gem4; }
+
+.Board {
+  display: grid;
+  grid-template-areas:
+    'Gem1 Gem1 Gem1'
+    'Gem2 PlayArea Gem3'
+    'Gem4 Gem4 Gem4';
+    grid-template-columns: 25px 1fr 25px;
+
+    width: 80%;
+}
+
+.Gem{
+    width: 25px;
+    height: 25px;
+    margin: auto;
+}
+
+.Card{
+    float:left;
+    width: 20%;
+    height: 20%;
+}
