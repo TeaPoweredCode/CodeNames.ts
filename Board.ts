@@ -6,12 +6,11 @@ class Board {
     {
         this.StartingTeam = Math.floor(Math.random() * 2) == 1 ? eCardType.RedSpy : eCardType.BlueSpy;
 
-        let cardOrder: Array<eCardType> = [eCardType.Assassin,
-        eCardType.Neutral, eCardType.Neutral, eCardType.Neutral, eCardType.Neutral, eCardType.Neutral, eCardType.Neutral, eCardType.Neutral,
-        eCardType.RedSpy, eCardType.RedSpy, eCardType.RedSpy, eCardType.RedSpy, eCardType.RedSpy, eCardType.RedSpy, eCardType.RedSpy, eCardType.RedSpy,
-        eCardType.BlueSpy, eCardType.BlueSpy, eCardType.BlueSpy, eCardType.BlueSpy, eCardType.BlueSpy, eCardType.BlueSpy, eCardType.BlueSpy, eCardType.BlueSpy,
-        this.StartingTeam];            
-
+        let cardOrder: Array<eCardType> = this.BuildArray([[eCardType.Neutral,7],
+                                                           [eCardType.RedSpy,8],
+                                                           [eCardType.BlueSpy,8],
+                                                           [eCardType.Assassin,1],
+                                                           [this.StartingTeam,1]]);
         this.ShuffleArray(cardOrder);
 
         let randomNumbers: Array<number> = [];
@@ -26,8 +25,22 @@ class Board {
             this.cards.push(new Card(words[randomNumbers[i]], cardOrder[i]));
     }
 
+    BuildArray(cardData :Array<Array<eCardType|number>>)
+    {
+        let cardPack:Array<eCardType> = [];
 
-    ShuffleArray(a) {
+        for (let pair of cardData)
+        {
+            for(let i = 0 ; i < pair[1]; i++)
+            {
+                cardPack.push(pair[0]);
+            }
+        }
+
+        return cardPack;
+    }
+
+    ShuffleArray(a:Array<eCardType>) {
         for (let i = a.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [a[i], a[j]] = [a[j], a[i]];
