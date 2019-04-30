@@ -1,7 +1,8 @@
 class Board {
-    cards: Array<Card> = [];
+    BoardElement: HTMLElement;
+    Cards: Array<Card> = [];
     StartingTeam: eCardType;
-
+    
     constructor()
     {
         this.StartingTeam = Math.floor(Math.random() * 2) == 1 ? eCardType.RedSpy : eCardType.BlueSpy;
@@ -22,7 +23,7 @@ class Board {
         }
 
         for (let i = 0; i < cardOrder.length; i++)
-            this.cards.push(new Card(words[randomNumbers[i]], cardOrder[i]));
+            this.Cards.push(new Card(words[randomNumbers[i]], cardOrder[i]));
     }
 
     BuildArray(cardData :Array<Array<eCardType|number>>)
@@ -48,7 +49,7 @@ class Board {
         return a;
     }
 
-    Render(outputEle: HTMLElement)
+    Render(outputElement: HTMLElement)
     {
         let gemColor: string = (this.StartingTeam == eCardType.BlueSpy ? "Blue" : "Red");
         let html :string = `<div class="Board">
@@ -58,11 +59,11 @@ class Board {
                             <div class="Gem Gem3" style="background-color:${gemColor}"></div>
                             <div class="Gem Gem4" style="background-color:${gemColor}"></div>
                             </div>`;
+        this.BoardElement = htmlToElement(html);
+        outputElement.append(this.BoardElement);
 
-        outputEle.innerHTML = html;
-
-        let playArea : HTMLElement = outputEle.querySelector(".PlayArea");
-        this.cards.forEach(function (card) {
+        let playArea : HTMLElement = this.BoardElement.querySelector(".PlayArea");
+        this.Cards.forEach(function (card) {
             card.Render(playArea);
         })
     }

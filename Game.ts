@@ -1,7 +1,10 @@
 enum eCardType { RedSpy, BlueSpy, Neutral, Assassin}
 
-let main: HTMLElement = document.createElement('div');
-document.body.appendChild(main);
+function htmlToElement(html : string) : HTMLElement{
+    let template = document.createElement('template'); 
+    template.innerHTML = html.trim();
+    return <HTMLElement>template.content.firstChild;
+}
 
 let board: Board = new Board();
-board.Render(main);
+board.Render(document.body);

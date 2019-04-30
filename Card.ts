@@ -12,7 +12,8 @@ class Card {
 
     Click()
     {
-        this.Cardrender.style.color = this.ToggledColor();
+        this.Cardrender.style.color = "#FFF";
+        this.Cardrender.style.backgroundColor = this.ToggledColor();
         return true;
     }
 
@@ -29,13 +30,12 @@ class Card {
         return color;
     }
 
-    Render(outputEle: HTMLElement)
+    Render(outputElement: HTMLElement)
     {
-        this.Cardrender = document.createElement('div');
-        this.Cardrender.className = 'Card';
-        this.Cardrender.style.color = 'Green';
-        this.Cardrender.innerHTML = this.word;
+        let html :string = `<div class="Card"><div>${this.word}</div><div>${this.word}</div></div>`;
+
+        this.Cardrender = htmlToElement(html);
         this.Cardrender.addEventListener('click', (e:Event) => this.Click());
-        outputEle.appendChild(this.Cardrender);
+        outputElement.appendChild(this.Cardrender);
     }
 }
