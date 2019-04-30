@@ -34,7 +34,7 @@
 .Card div:first-child
 {
     transform: rotate(180deg);
-    //background-color: #F7DFAE;
+    background-color: #F7DFAE;
     background-color: #FFFFFF5E;
     border-radius: 10px;
     width:80%;
