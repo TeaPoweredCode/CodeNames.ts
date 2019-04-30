@@ -1,4 +1,8 @@
-class Board {
+import { eCardType } from "./enums"
+import { Card } from "./Card"
+import { words } from "./WordList"
+
+export class Board {
     BoardElement: HTMLElement;
     Cards: Array<Card> = [];
     StartingTeam: eCardType;
@@ -26,6 +30,12 @@ class Board {
             this.Cards.push(new Card(words[randomNumbers[i]], cardOrder[i]));
     }
 
+    htmlToElement(html : string) : HTMLElement{
+        let template = document.createElement('template'); 
+        template.innerHTML = html.trim();
+        return <HTMLElement>template.content.firstChild;
+    }
+    
     BuildArray(cardData :Array<Array<eCardType|number>>)
     {
         let cardPack:Array<eCardType> = [];
@@ -52,14 +62,14 @@ class Board {
     Render(outputElement: HTMLElement)
     {
         let gemColor: string = (this.StartingTeam == eCardType.BlueSpy ? "Blue" : "Red");
-        let html :string = `<div class="Board">
-                            <div class="Gem Gem1" style="background-color:${gemColor}"></div>
-                            <div class="Gem Gem2" style="background-color:${gemColor}"></div>
-                            <div class="PlayArea"></div>
-                            <div class="Gem Gem3" style="background-color:${gemColor}"></div>
-                            <div class="Gem Gem4" style="background-color:${gemColor}"></div>
-                            </div>`;
-        this.BoardElement = htmlToElement(html);
+        let html :string = `<div class="Board">`+
+                            `<div class="Gem Gem1" style="background-color:${gemColor}"></div>` +
+                            `<div class="Gem Gem2" style="background-color:${gemColor}"></div>` +
+                            `<div class="PlayArea"></div>` +
+                            `<div class="Gem Gem3" style="background-color:${gemColor}"></div>` +
+                            `<div class="Gem Gem4" style="background-color:${gemColor}"></div>` +
+                            `</div>`;
+        this.BoardElement = this.htmlToElement(html);
         outputElement.append(this.BoardElement);
 
         let playArea : HTMLElement = this.BoardElement.querySelector(".PlayArea");
