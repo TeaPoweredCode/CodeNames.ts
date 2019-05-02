@@ -23,7 +23,8 @@ gulp.task("default", gulp.series(gulp.parallel('copy-html'), function () {
             "src/WordList.ts",
             "src/UIElements/UIElement.ts",
             "src/UIElements/Board.ts",
-            "src/UIElements/Card.ts"
+            "src/UIElements/Card.ts",
+            "src/init.ts"
         ],
         cache: {},
         packageCache: {}

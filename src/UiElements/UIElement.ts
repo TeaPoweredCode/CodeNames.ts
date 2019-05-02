@@ -7,5 +7,4 @@ export class UiElement {
         template.innerHTML = html.trim();
         return <HTMLElement>template.content.firstChild;
     }
-
 }
