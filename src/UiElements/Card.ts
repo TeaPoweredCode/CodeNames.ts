@@ -1,21 +1,21 @@
-import { eCardType } from "./enums"
+import { eCardType } from "../enums"
+import { UiElement } from "./UiElement";
 
-export class Card {
+export class Card  extends UiElement {
     word: string;
     CardType: eCardType;
-    Cardrender: HTMLElement;
 
     constructor(pword: string, cardType: eCardType)
     {
+        super();
         this.word = pword;
         this.CardType = cardType;
     }
 
     Click()
     {
-        this.Cardrender.style.color = "#FFF";
-        this.Cardrender.style.backgroundColor = this.ToggledColor();
-        return true;
+        this.DomElement.style.color = "#FFF";
+        this.DomElement.style.backgroundColor = this.ToggledColor();
     }
 
     ToggledColor()
@@ -31,18 +31,12 @@ export class Card {
         return color;
     }
 
-    htmlToElement(html : string) : HTMLElement{
-        let template = document.createElement('template'); 
-        template.innerHTML = html.trim();
-        return <HTMLElement>template.content.firstChild;
-    }
-
     Render(outputElement: HTMLElement)
     {
         let html :string = `<div class="Card"><div>${this.word}</div><div>${this.word}</div></div>`;
 
-        this.Cardrender = this.htmlToElement(html);
-        this.Cardrender.addEventListener('click', (e:Event) => this.Click());
-        outputElement.appendChild(this.Cardrender);
+        this.DomElement = this.htmlToElement(html);
+        this.DomElement.addEventListener('click', (e:Event) => this.Click());
+        outputElement.appendChild(this.DomElement);
     }
 }

@@ -21,8 +21,9 @@ gulp.task("default", gulp.series(gulp.parallel('copy-html'), function () {
         entries: [
             "src/Game.ts",
             "src/WordList.ts",
-            "src/Board.ts",
-            "src/Card.ts"
+            "src/UIElements/UIElement.ts",
+            "src/UIElements/Board.ts",
+            "src/UIElements/Card.ts"
         ],
         cache: {},
         packageCache: {}

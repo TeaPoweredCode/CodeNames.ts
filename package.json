@@ -1,7 +1,7 @@
 {
   "name": "codenames_typescript",
   "version": "1.0.0",
-  "description": "Implementation of the [CodeNames](http://amzn.com/B014Q1XX9S) board game using TypeScript.",
+  "description": "Implementation of the CodeNames board game using TypeScript.",
   "main": "CodeName.js",
   "dependencies": {
     "browserify": "^16.2.3",
@@ -22,7 +22,7 @@
     "type": "git",
     "url": "git+https://MrLuxan@github.com/MrLuxan/CodeNames_TypeScript.git"
   },
-  "author": "",
+  "author": "MrLuxan",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/MrLuxan/CodeNames_TypeScript/issues"

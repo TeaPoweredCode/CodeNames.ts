@@ -1,14 +1,15 @@
-import { eCardType } from "./enums"
+import { eCardType } from "../enums"
 import { Card } from "./Card"
-import { words } from "./WordList"
+import { words } from "../WordList"
+import { UiElement} from "./UiElement"
 
-export class Board {
-    BoardElement: HTMLElement;
+export class Board extends UiElement {
     Cards: Array<Card> = [];
     StartingTeam: eCardType;
     
     constructor()
     {
+        super();
         this.StartingTeam = Math.floor(Math.random() * 2) == 1 ? eCardType.RedSpy : eCardType.BlueSpy;
 
         let cardOrder: Array<eCardType> = this.BuildArray([[eCardType.Neutral,7],
@@ -28,12 +29,6 @@ export class Board {
 
         for (let i = 0; i < cardOrder.length; i++)
             this.Cards.push(new Card(words[randomNumbers[i]], cardOrder[i]));
-    }
-
-    htmlToElement(html : string) : HTMLElement{
-        let template = document.createElement('template'); 
-        template.innerHTML = html.trim();
-        return <HTMLElement>template.content.firstChild;
     }
     
     BuildArray(cardData :Array<Array<eCardType|number>>)
@@ -69,10 +64,10 @@ export class Board {
                             `<div class="Gem Gem3" style="background-color:${gemColor}"></div>` +
                             `<div class="Gem Gem4" style="background-color:${gemColor}"></div>` +
                             `</div>`;
-        this.BoardElement = this.htmlToElement(html);
-        outputElement.append(this.BoardElement);
+        this.DomElement = this.htmlToElement(html);
+        outputElement.append(this.DomElement);
 
-        let playArea : HTMLElement = this.BoardElement.querySelector(".PlayArea");
+        let playArea : HTMLElement = this.DomElement.querySelector(".PlayArea");
         this.Cards.forEach(function (card) {
             card.Render(playArea);
         })

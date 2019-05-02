@@ -2,7 +2,7 @@
     "files": [
         "src/Game.ts",
         "src/WordList.ts",
-        "src/Board.ts",
+        "src/UIElements/Board.ts",
         "src/Card.ts"
     ],
     "compilerOptions": {
