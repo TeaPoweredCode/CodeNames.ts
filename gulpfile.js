@@ -19,11 +19,7 @@ gulp.task("default", gulp.series(gulp.parallel('copy-html'), function () {
         basedir: '.',
         debug: true,
         entries: [
-            "src/Game.ts",
-            "src/WordList.ts",
-            "src/UIElements/UIElement.ts",
-            "src/UIElements/Board.ts",
-            "src/UIElements/Card.ts",
+            
             "src/init.ts"
         ],
         cache: {},
