@@ -11,7 +11,7 @@ Using this project as a means to lean some;
 
 Next to do;
 * More UI work
-* Css to Sass
-* minify js
+* ~~Css to Sass~~
+* ~~minify js~~
 * SpyMaster Card
 * Board's Play QR code
