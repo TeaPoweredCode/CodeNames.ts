@@ -5,8 +5,11 @@ var tsify = require("tsify");
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var buffer = require('vinyl-buffer');
+var sass = require('gulp-sass');
+var concat = require('gulp-concat');
+
 var paths = {
-    pages: ['src/*.html','src/*.css']
+    pages: ['src/*.html']
 };
 
 gulp.task("copy-html", function () {
@@ -14,14 +17,21 @@ gulp.task("copy-html", function () {
         .pipe(gulp.dest("dist"));
 });
 
-gulp.task("default", gulp.series(gulp.parallel('copy-html'), function () {
+
+sass.compiler = require('node-sass');
+gulp.task('sass', function () {
+    return gulp.src('./src/**/*.scss')
+      .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+      .pipe(concat('style.css'))
+      .pipe(gulp.dest('./dist'));
+});
+   
+
+gulp.task("default", gulp.series(gulp.parallel(['copy-html','sass']), function () {
     return browserify({
         basedir: '.',
         debug: true,
-        entries: [
-            
-            "src/init.ts"
-        ],
+        entries: ["src/Init.ts"],
         cache: {},
         packageCache: {}
     })
