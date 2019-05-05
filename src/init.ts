@@ -1,2 +1,2 @@
-import {Game} from  "./Game";
-new Game();
+import {CodeNamesGame} from  "./Game";
+new CodeNamesGame().NewGame();

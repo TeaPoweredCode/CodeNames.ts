@@ -3,13 +3,13 @@ import { words } from "./WordList";
 import { Board } from "./UIElements/Board";
 import { Card } from "./UIElements/Card";
 
-export class Game
+export class CodeNamesGame
 {
     StartingTeam: eCardType;
     Cards: Array<Card> = [];
     Board: Board;
     
-    constructor()
+    NewGame()
     {
         this.StartingTeam = Math.floor(Math.random() * 2) == 1 ? eCardType.RedSpy : eCardType.BlueSpy;
 

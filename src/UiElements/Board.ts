@@ -1,12 +1,12 @@
 import { eCardType } from "../enums"
 import { UiElement} from "./UiElement"
-import { Game } from "../Game";
+import { CodeNamesGame } from "../Game";
 
 export class Board extends UiElement {
 
-    Game: Game;
+    Game: CodeNamesGame;
     
-    constructor(game: Game)
+    constructor(game: CodeNamesGame)
     {
         super();
         this.Game = game;
@@ -14,14 +14,7 @@ export class Board extends UiElement {
     
     Render(outputElement: HTMLElement)
     {
-        let gemColor: string = (this.Game.StartingTeam == eCardType.BlueSpy ? "Blue" : "Red");
-        let html :string = `<div class="Board">`+
-                            //`<div class="Gem Gem1" style="background-color:${gemColor}"></div>` +
-                            //`<div class="Gem Gem2" style="background-color:${gemColor}"></div>` +
-                            `<div class="PlayArea"></div>` +
-                            //`<div class="Gem Gem3" style="background-color:${gemColor}"></div>` +
-                            //`<div class="Gem Gem4" style="background-color:${gemColor}"></div>` +
-                            `</div>`;
+        let html :string = `<div class="Board"><div class="PlayArea"></div></div>`;
         this.DomElement = this.htmlToElement(html);
         outputElement.append(this.DomElement);
 
