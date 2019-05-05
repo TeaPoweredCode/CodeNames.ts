@@ -9,7 +9,7 @@ var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 
 var paths = {
-    pages: ['src/*.html']
+    pages: ['src/*.html','src/*.svg']
 };
 
 gulp.task("copy-html", function () {

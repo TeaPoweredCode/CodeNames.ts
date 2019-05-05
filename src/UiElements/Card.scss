@@ -1,12 +1,13 @@
 .Card{
     float:left;
-    width: 18%;
-    height: 18%;
+    height: calc(20% - 6px);
+    width: calc(20% - 6px);
+    margin:3px;
+
     text-align: center;
     background-color: #FFDA8D;
-    margin: 1%;
+    
     border-radius: 5px;
-    height: 80%;
     text-transform: capitalize;
  
     div:first-child{
@@ -15,7 +16,7 @@
         background-color: #FFFFFF5E;
         border-radius: 10px;
         width:80%;
-        margin: 3px auto;
-        height: 30px;
+        margin: 5px auto;
+        height: 50%;
     }
 }
