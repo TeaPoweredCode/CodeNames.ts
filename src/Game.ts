@@ -1,7 +1,8 @@
 import { eCardType } from "./enums";
-import { words } from "./WordList";
+import { Words } from "./WordList";
 import { Board } from "./UIElements/Board";
 import { Card } from "./UIElements/Card";
+import { BoardCodec } from "./BoradCodec";
 
 export class CodeNamesGame
 {
@@ -24,16 +25,22 @@ export class CodeNamesGame
         let randomNumbers: Array<number> = [];
         while (randomNumbers.length < cardOrder.length)
         {
-            let randomnumber = Math.floor(Math.random() * words.length);
+            let randomnumber = Math.floor(Math.random() * Words.length);
             if (randomNumbers.indexOf(randomnumber) > -1) continue;
                 randomNumbers[randomNumbers.length] = randomnumber;
         }
 
         for (let i = 0; i < cardOrder.length; i++)
-            this.Cards.push(new Card(words[randomNumbers[i]], cardOrder[i]));
+            this.Cards.push(new Card(Words[randomNumbers[i]], cardOrder[i]));
         
         this.Board = new Board(this);
         this.Board.Render(document.body);
+    }
+
+    LoadData(cards :Array<Card>, startingTeam :eCardType)
+    {
+        this.Cards = cards;
+        this.StartingTeam = startingTeam; 
     }
 
     BuildArray(cardData :Array<Array<eCardType|number>>) : Array<eCardType>

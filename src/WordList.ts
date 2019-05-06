@@ -1,4 +1,4 @@
-export let words: Array<string> = [
+export let Words: Array<string> = [
     "remain",
     "axiomatic",
     "thought",
