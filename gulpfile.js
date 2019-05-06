@@ -9,12 +9,17 @@ var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 
 var paths = {
-    pages: ['src/*.html','src/*.svg']
+    pages: ['src/*.html','src/*.js']
 };
 
 gulp.task("copy-html", function () {
     return gulp.src(paths.pages)
         .pipe(gulp.dest("dist"));
+});
+
+gulp.task("copy-images", function () {
+    return gulp.src('src/images/*')
+        .pipe(gulp.dest("dist/images"));
 });
 
 
@@ -27,7 +32,7 @@ gulp.task('sass', function () {
 });
    
 
-gulp.task("default", gulp.series(gulp.parallel(['copy-html','sass']), function () {
+gulp.task("default", gulp.series(gulp.parallel(['copy-html','copy-images','sass']), function () {
     return browserify({
         basedir: '.',
         debug: true,

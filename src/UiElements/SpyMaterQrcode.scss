@@ -1,0 +1,16 @@
+.SpyMaterQrcode{
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 300px;
+    z-index: 10;
+    background-image: url(images/QrcodeBG.png);
+
+
+    .Qrcode{
+        margin: 60px 0 0 135px;
+    }
+}

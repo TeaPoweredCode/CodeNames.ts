@@ -2,7 +2,7 @@ import { eCardType } from "./enums";
 import { Words } from "./WordList";
 import { Board } from "./UIElements/Board";
 import { Card } from "./UIElements/Card";
-import { BoardCodec } from "./BoradCodec";
+import { SpyMaterQrcode } from "./UiElements/SpyMaterQrcode"
 
 export class CodeNamesGame
 {
@@ -35,6 +35,9 @@ export class CodeNamesGame
         
         this.Board = new Board(this);
         this.Board.Render(document.body);
+
+        new SpyMaterQrcode(this).Render(document.body);
+
     }
 
     LoadData(cards :Array<Card>, startingTeam :eCardType)
