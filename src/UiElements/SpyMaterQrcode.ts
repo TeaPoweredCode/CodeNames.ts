@@ -14,9 +14,14 @@ export class SpyMaterQrcode extends UiElement {
         this.GameEncode = new BoardCodec().ToString(game);
     }
 
+    ReadyButtonClick()
+    {
+        this.DomElement.parentNode.removeChild(this.DomElement);
+    }
+
     Render(outputElement: HTMLElement)
     {
-        let html :string = `<div class="SpyMaterQrcode"><div class="Qrcode"></div><div class="QRReadyButton"></div></div>`;
+        let html :string = `<div class="SpyMaterQrcode"><div class="Qrcode"></div><button class="ReadyButton">Ready</button></div>`;
         this.DomElement = this.htmlToElement(html);
         outputElement.append(this.DomElement);
 
@@ -28,14 +33,12 @@ export class SpyMaterQrcode extends UiElement {
             height: 150,
             colorDark : "#000000",
             colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.H
+            correctLevel : QRCode.CorrectLevel.H,
+            quiteZone : 5
         });
 
-
-
-        //qrcode.makeCode(this.SpyMasterUrl + this.GameEncode);
-
-        console.log(qrcode);
+        let readyButton = this.DomElement.getElementsByClassName('ReadyButton')[0];
+        readyButton.addEventListener('click', (e:Event) => this.ReadyButtonClick());
     }
 
 }
