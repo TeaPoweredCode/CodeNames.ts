@@ -355,8 +355,8 @@ var QRCode;
 		
 			this._htOption = htOption;
 			this._elCanvas = document.createElement("canvas");
-			this._elCanvas.width = htOption.width;
-			this._elCanvas.height = htOption.height;
+			this._elCanvas.width = htOption.width + (htOption.quiteZone * 2);
+			this._elCanvas.height = htOption.height + (htOption.quiteZone * 2);
 			el.appendChild(this._elCanvas);
 			this._el = el;
 			this._oContext = this._elCanvas.getContext("2d");
@@ -374,7 +374,8 @@ var QRCode;
 		 * @param {QRCode} oQRCode 
 		 */
 		Drawing.prototype.draw = function (oQRCode) {
-            var _elImage = this._elImage;
+			var _elImage = this._elImage;
+			var _elCanvas = this._elCanvas;
             var _oContext = this._oContext;
             var _htOption = this._htOption;
             
@@ -386,12 +387,15 @@ var QRCode;
 
 			_elImage.style.display = "none";
 			this.clear();
+
+			_oContext.fillStyle = _htOption.colorLight;					
+			_oContext.fillRect(0,0, _elCanvas.width , _elCanvas.height);
 			
 			for (var row = 0; row < nCount; row++) {
 				for (var col = 0; col < nCount; col++) {
 					var bIsDark = oQRCode.isDark(row, col);
-					var nLeft = col * nWidth;
-					var nTop = row * nHeight;
+					var nLeft = (col * nWidth) + _htOption.quiteZone;
+					var nTop = (row * nHeight) + _htOption.quiteZone;
 					_oContext.strokeStyle = bIsDark ? _htOption.colorDark : _htOption.colorLight;
 					_oContext.lineWidth = 1;
 					_oContext.fillStyle = bIsDark ? _htOption.colorDark : _htOption.colorLight;					
@@ -539,7 +543,8 @@ var QRCode;
 			typeNumber : 4,
 			colorDark : "#000000",
 			colorLight : "#ffffff",
-			correctLevel : QRErrorCorrectLevel.H
+			correctLevel : QRErrorCorrectLevel.H,
+			quiteZone : 0
 		};
 		
 		if (typeof vOption === 'string') {
