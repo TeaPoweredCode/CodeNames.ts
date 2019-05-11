@@ -6,12 +6,13 @@ declare var QRCode: any;
 
 export class SpyMaterQrcode extends UiElement {
 
-    SpyMasterUrl : string = "https://mrluxan.github.io/CodeNames_TypeScript/SM?";
+    SpyMasterUrl : string = "https://mrluxan.github.io/CodeNames_TypeScript?SM=";
     GameEncode : string = "";
 
     constructor(game:CodeNamesGame){
         super();
         this.GameEncode = new BoardCodec().ToString(game);
+        console.log(this.GameEncode);
     }
 
     ReadyButtonClick()

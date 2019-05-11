@@ -3,13 +3,50 @@ import { Words } from "./WordList";
 import { Board } from "./UIElements/Board";
 import { Card } from "./UIElements/Card";
 import { SpyMaterQrcode } from "./UiElements/SpyMaterQrcode"
+import { BoardCodec } from "./BoradCodec";
 
 export class CodeNamesGame
 {
     StartingTeam: eCardType;
     Cards: Array<Card> = [];
     Board: Board;
+    SpyMaster: boolean = false;
     
+    Run()
+    {
+        let spyMasterCode : string = this.ReadGETdata("SM");
+        if(spyMasterCode == null){
+            this.NewGame();
+        }
+        else{
+            this.LoadSpyMaster(spyMasterCode);
+        }
+    }
+
+    ReadGETdata(lookingFor : string) : string
+    {           
+        interface IDictionary {
+            [key: string]: string;
+        };
+
+        if(window.location.href.indexOf('?') > 0)
+        {
+            let map :IDictionary = {};
+            let getData : string = window.location.href.split( "?" )[1];
+            let params : Array<string> = getData.split( "&" );
+            for(var i = 0; i < params.length; i++)
+            {
+                let pair : string[] = params[i].split( "=" );
+                map[pair[0]] = pair[1];
+            }
+    
+            return(map[lookingFor]);
+        }
+        else
+            return null;
+    }
+
+
     NewGame()
     {
         this.StartingTeam = Math.floor(Math.random() * 2) == 1 ? eCardType.RedSpy : eCardType.BlueSpy;
@@ -30,20 +67,22 @@ export class CodeNamesGame
                 randomNumbers[randomNumbers.length] = randomnumber;
         }
 
-        for (let i = 0; i < cardOrder.length; i++)
-            this.Cards.push(new Card(Words[randomNumbers[i]], cardOrder[i]));
-        
         this.Board = new Board(this);
+
+        for (let i = 0; i < cardOrder.length; i++)
+            this.Cards.push(new Card(Words[randomNumbers[i]], cardOrder[i], this.Board));
+    
         this.Board.Render(document.body);
 
         new SpyMaterQrcode(this).Render(document.body);
-
     }
 
-    LoadData(cards :Array<Card>, startingTeam :eCardType)
+    LoadSpyMaster(spyMasterCode : string)
     {
-        this.Cards = cards;
-        this.StartingTeam = startingTeam; 
+        this.SpyMaster = true;
+        this.Board = new Board(this);
+        new BoardCodec().FromString(this, spyMasterCode);
+        this.Board.Render(document.body);
     }
 
     BuildArray(cardData :Array<Array<eCardType|number>>) : Array<eCardType>

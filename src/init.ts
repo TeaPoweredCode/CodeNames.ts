@@ -1,2 +1,2 @@
 import {CodeNamesGame} from  "./Game";
-new CodeNamesGame().NewGame();
+new CodeNamesGame().Run();

@@ -1,42 +1,50 @@
 import { eCardType } from "../enums"
 import { UiElement } from "./UiElement";
+import { Board } from "./Board"
+
 
 export class Card  extends UiElement {
-    word: string;
+    Word: string;
     CardType: eCardType;
+    GameBoard: Board
 
-    constructor(pword: string, cardType: eCardType)
+    constructor(word: string, cardType: eCardType, board: Board)
     {
         super();
-        this.word = pword;
+        this.Word = word;
         this.CardType = cardType;
+        this.GameBoard = board;
     }
 
     Click()
     {
-        this.DomElement.style.color = "#FFF";
-        this.DomElement.style.backgroundColor = this.ToggledColor();
+        this.ToggledColor();
     }
 
     ToggledColor()
     {
-        let color: string;
+        let bgColor: string;
         switch (this.CardType)
         {
-            case eCardType.Assassin: color = "Black"; break;
-            case eCardType.Neutral: color = "Gray"; break;
-            case eCardType.RedSpy: color = "Red"; break;
-            case eCardType.BlueSpy: color = "Blue"; break;
+            case eCardType.Assassin: bgColor = "Black"; break;
+            case eCardType.Neutral: bgColor = "Gray"; break;
+            case eCardType.RedSpy: bgColor = "Red"; break;
+            case eCardType.BlueSpy: bgColor = "Blue"; break;
         }
-        return color;
+
+        this.DomElement.style.color = "#FFF";
+        this.DomElement.style.backgroundColor = bgColor;
     }
 
     Render(outputElement: HTMLElement)
     {
-        let html :string = `<div class="Card"><div>${this.word}</div><div>${this.word}</div></div>`;
-
+        let html :string = `<div class="Card"><div>${this.Word}</div><div>${this.Word}</div></div>`;
         this.DomElement = this.htmlToElement(html);
-        this.DomElement.addEventListener('click', (e:Event) => this.Click());
         outputElement.appendChild(this.DomElement);
+
+        if(!this.GameBoard.Game.SpyMaster)
+            this.DomElement.addEventListener('click', (e:Event) => this.Click());
+        else
+            this.ToggledColor;
     }
 }

@@ -19,8 +19,13 @@ export class Board extends UiElement {
         outputElement.append(this.DomElement);
 
         let playArea : HTMLElement = this.DomElement.querySelector(".PlayArea");
-        this.Game.Cards.forEach(function (card) {
-            card.Render(playArea);
-        })
+        
+        for(let i =0; i < this.Game.Cards.length; i++)
+        {
+            this.Game.Cards[i].Render(playArea);
+
+            if(this.Game.SpyMaster)
+                this.Game.Cards[i].Click();
+        }
     }
 }

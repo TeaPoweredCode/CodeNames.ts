@@ -13,7 +13,7 @@ export class BoardCodec
         for(let i = 0; i < game.Cards.length; i++){
             let card : Card = game.Cards[i];
 
-            let wordIndex : number = Words.indexOf(card.word);
+            let wordIndex : number = Words.indexOf(card.Word);
             wordOrder += this.Pad(wordIndex.toString(36),2);
 
             typeOrder += card.CardType.toString();
@@ -49,7 +49,7 @@ export class BoardCodec
             let cardTypeNumber : number = parseInt(typeOrder[i]);
             typecount += cardTypeNumber;
 
-            cards.push(new Card(word,<eCardType>cardTypeNumber));
+            cards.push(new Card(word,<eCardType>cardTypeNumber,game.Board));
         }
 
         game.Cards = cards;
