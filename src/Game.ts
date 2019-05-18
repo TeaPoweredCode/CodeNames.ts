@@ -21,6 +21,8 @@ export class CodeNamesGame
         else{
             this.LoadSpyMaster(spyMasterCode);
         }
+
+        document.body.style.backgroundImage = `url("./images/bg${(this.StartingTeam == eCardType.RedSpy ? "red" : "blue")}.png")`;
     }
 
     ReadGETdata(lookingFor : string) : string
