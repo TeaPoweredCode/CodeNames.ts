@@ -21,7 +21,7 @@ export class SpyMaterQrcode extends UiElement {
 
     Render(outputElement: HTMLElement)
     {
-        let html :string = `<div class="SpyMaterQrcode"><div class="Qrcode"></div><button class="ReadyButton">Ready</button></div>`;
+        let html :string = `<div class="SpyMasterOverlay"><div class="SpyMaterQrcode"><div class="Qrcode"></div><button class="ReadyButton">Ready</button></div></div>`;
         this.DomElement = this.htmlToElement(html);
         outputElement.append(this.DomElement);
 
@@ -36,8 +36,8 @@ export class SpyMaterQrcode extends UiElement {
             correctLevel : QRCode.CorrectLevel.H,
             quiteZone : 5
         });
-
-        let readyButton = this.DomElement.getElementsByClassName('ReadyButton')[0];
+        
+        let readyButton = this.DomElement;
         readyButton.addEventListener('click', (e:Event) => this.ReadyButtonClick());
     }
 
