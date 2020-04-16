@@ -1,0 +1,83 @@
+.MenuHidden{
+    transform: translateX(-190px);
+}
+
+.MenuTransform {
+    -webkit-transition: all 1s ease;  
+    -moz-transition: all 1s ease;  
+    -o-transition: all 1s ease;  
+    -ms-transition: all 1s ease;  
+    transition: all 1s ease;
+}
+
+.Menu
+{
+    position: absolute;
+    top:0px;
+    width: 301px;
+    height: 100%;
+
+    li{
+        cursor: pointer;
+    }
+
+    .MenuPanel{
+        position: relative;
+        background-color:  rgba(0,0,0, 0.7);
+        width: 190px;
+        height: 100%;
+        float: left;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+
+        .Info{
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+
+            .version{
+                color: rgba(255,255,255, 0.5);
+            }
+        }
+    }
+
+    .MenuButton{
+        width: 26px;
+        height: 26px;
+        border-radius:50%;
+        border: 0px;
+        padding: 0px;
+        background-color: rgba(255,255,255, 0.7);
+        cursor: pointer;
+
+        .InnerButton
+        {
+            width: 20px;
+            height: 20px;
+            margin: 3px;
+            border-radius:50%;
+            background-color: rgba(255,255,255, 0.7);
+            position: relative;
+    
+            div{
+                background: #000;
+                width: 12px;
+                height: 5px;
+                border-radius: 3px;
+                position: absolute;
+            }
+    
+            .TopBar{
+                transform: rotate(45deg);
+                left: 5px;
+                top: 5px;
+            }
+    
+            .ButtonBar{
+                transform: rotate(-45deg);
+                left: 5px;
+                bottom: 5px;
+            }
+        }
+    }
+}

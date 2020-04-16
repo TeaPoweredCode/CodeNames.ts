@@ -4,6 +4,7 @@ import { Board } from "./UIElements/Board";
 import { Card } from "./UIElements/Card";
 import { SpyMaterQrcode } from "./UiElements/SpyMaterQrcode"
 import { BoardCodec } from "./BoradCodec";
+import { Menu } from "./UIElements/Menu";
 
 export class CodeNamesGame
 {
@@ -11,16 +12,30 @@ export class CodeNamesGame
     Cards: Array<Card> = [];
     Board: Board;
     SpyMaster: boolean = false;
-    
+    MainMenu: Menu;
+
+    SpyMasterUrlBase : string = "https://mrluxan.github.io/CodeNames.ts/?SM=";
+    GameEncode : string = "";
+
+    GetSpyMasterUrl() : string
+    {
+        return this.SpyMasterUrlBase + this.GameEncode;
+    }
+
     Run()
     {
         let spyMasterCode : string = this.ReadGETdata("SM");
-        if(spyMasterCode == null){
+        this.SpyMaster = spyMasterCode != null; 
+
+        if(!this.SpyMaster){
             this.NewGame();
         }
         else{
             this.LoadSpyMaster(spyMasterCode);
         }
+
+        this.MainMenu = new Menu(this);
+        this.MainMenu.Render(document.body);
 
         document.body.style.backgroundImage = `url("./images/bg${(this.StartingTeam == eCardType.RedSpy ? "red" : "blue")}.png")`;
     }
@@ -76,12 +91,12 @@ export class CodeNamesGame
     
         this.Board.Render(document.body);
 
+        this.GameEncode = new BoardCodec().ToString(this);
         new SpyMaterQrcode(this).Render(document.body);
     }
 
     LoadSpyMaster(spyMasterCode : string)
     {
-        this.SpyMaster = true;
         this.Board = new Board(this);
         new BoardCodec().FromString(this, spyMasterCode);
         this.Board.Render(document.body);
