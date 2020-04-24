@@ -1,6 +1,7 @@
 import { UiElement } from "./UiElement";
 import {CodeNamesGame } from "../Game"
 import { BoardMenu } from "./BoardMenu";
+import { SpyMasterMenu } from "./SpyMasterMenu"; 
 
 export class Menu  extends UiElement {
 
@@ -40,7 +41,7 @@ export class Menu  extends UiElement {
                                     <div class="MenuInsert"></div>
                                     <div class="Info">
                                         <div class="MenuExtra"></div>
-                                        <div class="version">v 0.7</div>
+                                        <div class="version">v 0.8</div>
                                     </div>
                                 </div>
                                 <button title="Menu" class="MenuButton">
@@ -60,7 +61,7 @@ export class Menu  extends UiElement {
             new BoardMenu(this).Render(menuInsertDiv,extraInsertDiv);
         }
         else{
-            //new SpyMasterMenu().Render(insertDiv)
+            new SpyMasterMenu(this).Render(menuInsertDiv)
         }
 
         this.DomElement.querySelector('.MenuButton').addEventListener("click", (e:Event) => this.MenuButtonClick());

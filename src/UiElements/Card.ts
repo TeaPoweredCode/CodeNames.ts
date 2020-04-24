@@ -18,7 +18,10 @@ export class Card  extends UiElement {
 
     Click()
     {
-        this.ToggledColor();
+        if(this.GameBoard.Game.SpyMaster)
+            this.ToggledColor();
+        else
+            this.CheckMarkCard();
     }
 
     ToggledColor()
@@ -36,15 +39,21 @@ export class Card  extends UiElement {
         this.DomElement.style.backgroundColor = bgColor;
     }
 
+    CheckMarkCard()
+    {
+        let checkMark = <HTMLElement>this.DomElement.querySelector('.CheckMark');
+        checkMark.style.display = (checkMark.style.display == "none" ? "block" : "none");
+    }
+
     Render(outputElement: HTMLElement)
     {
-        let html :string = `<div class="Card"><div>${this.Word}</div><div>${this.Word}</div></div>`;
+        let html :string = `<div class="Card"><div>${this.Word}</div><div>${this.Word}</div><div class="CheckMark">&#10003;</div></div>`;
         this.DomElement = this.htmlToElement(html);
         outputElement.appendChild(this.DomElement);
 
-        if(!this.GameBoard.Game.SpyMaster)
-            this.DomElement.addEventListener('click', (e:Event) => this.Click());
-        else
+        this.DomElement.addEventListener('click', (e:Event) => this.Click());
+
+        if(this.GameBoard.Game.SpyMaster)
             this.ToggledColor;
     }
 }
