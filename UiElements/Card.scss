@@ -1,0 +1,39 @@
+.Card{
+    position: relative;
+
+    float:left;
+    height: calc(20% - 8px);
+    width: calc(20% - 8px);
+    margin:3px;
+
+    text-align: center;
+    background-color: #FFDA8D;
+    
+    border-radius: 5px;
+    text-transform: capitalize;
+
+    border: 1px solid rgba(0,0,0,0.2);
+    cursor: pointer;
+ 
+    div:first-child{
+        transform: rotate(180deg);
+        background-color: #F7DFAE;
+        background-color: #FFFFFF5E;
+        border-radius: 10px;
+        width:80%;
+        margin: 5px auto;
+        height: 50%;
+    }
+
+    .CheckMark{
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        display: none;
+        color: #FFF;
+        -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: black;
+        font-size: 45px;
+        font-weight: bolder;
+    }
+}
